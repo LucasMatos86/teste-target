@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Faturamento {
     public static void main(String[] args) {
-        String jsonFilePath = "src/atv03/faturamento.json";
+        String jsonFilePath = "src/atv03/dados.json";
         List<Double> faturamentoValores = lerFaturamentoDoArquivo(jsonFilePath);
 
         if (faturamentoValores.isEmpty()) {
@@ -35,8 +35,7 @@ public class Faturamento {
                 jsonContent.append((char) character);
             }
 
-            JSONObject jsonObject = new JSONObject(jsonContent.toString());
-            JSONArray faturamentoArray = jsonObject.getJSONArray("faturamento");
+            JSONArray faturamentoArray = new JSONArray(jsonContent.toString());
 
             for (int i = 0; i < faturamentoArray.length(); i++) {
                 JSONObject item = faturamentoArray.getJSONObject(i);
@@ -94,9 +93,10 @@ public class Faturamento {
     }
 
     private static void imprimirResultados(double menorFaturamento, double maiorFaturamento, double mediaFaturamento, int diasAcimaDaMedia) {
-        System.out.println("Menor valor de faturamento: R$ " + menorFaturamento);
-        System.out.println("Maior valor de faturamento: R$ " + maiorFaturamento);
+        System.out.printf("Menor valor de faturamento: R$ %.2f%n" , menorFaturamento);
+        System.out.printf("Maior valor de faturamento: R$ %.2f%n" , maiorFaturamento);
         System.out.printf("Media mensal de faturamento: R$ %.2f%n", mediaFaturamento);
         System.out.println("Numero de dias com faturamento acima da media mensal: " + diasAcimaDaMedia);
+        
     }
 }
